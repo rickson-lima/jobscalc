@@ -136,11 +136,17 @@ const Job = {
       },
 
       delete(req, res) {
-         const jobId = req.params.id
+         const deletedJobId = req.params.id
 
-         // não retorna o objeto com id que seja igual ao passado
-         Job.data = Job.data.filter(job => Number(job.id) !== Number(jobId))
+         // se o id do job for igual ao passado, não retorna ele
+         Job.data = Job.data.filter(job => Number(job.id) !== Number(deletedJobId))
 
+         // atualiza o id dos jobs caso o id do job deletado seja menor
+         Job.data.forEach(job => {
+            if (deletedJobId < job.id ) job.id = job.id - 1
+         })
+
+         // redirect to index page
          return res.redirect('/')
       }
    },
