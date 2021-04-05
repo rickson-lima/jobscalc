@@ -4,9 +4,13 @@ const express = require('express')
 const server = express()
 // importing routes file
 const routes = require('./routes')
+const path = require("path")
 
 // setting the ejs to template engine
 server.set('view engine', 'ejs')
+
+// changing the views folder locale
+server.set('views', path.join(__dirname, 'views'))
 
 // allowing statics files on public folder
 server.use(express.static("public"))
