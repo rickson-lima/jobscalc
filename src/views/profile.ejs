@@ -50,6 +50,7 @@
               <div class="input-wrapper">
                 <label for="name">Nome</label>
                 <input type="text" 
+                  required
                   id="name" 
                   name="name" 
                   value="<%= profile.name %>"/>
@@ -75,8 +76,10 @@
               <div class="input-wrapper">
                 <label for="monthly-budget">Quanto eu <br/>quero ganhar por mês?</label>
                 <input 
+                  required
                   type="amount"
                   step="0.1" 
+                  min="1"
                   id="monthly-budget" 
                   name="monthly-budget" 
                   placeholder="R$"
@@ -87,7 +90,10 @@
                 <label for="hours-per-day">Quantas horas <br/>
                   quero trabalhar por dia?</label>
                 <input 
+                  required
                   type="number"
+                  min="1"
+                  max="24"
                   id="hours-per-day" 
                   name="hours-per-day"
                   value="<%= profile["hours-per-day"] %>" />
@@ -99,7 +105,10 @@
                 <label for="days-per-week">Quantos dias <br/>quero
                   trabalhar por semana?</label>
                 <input
+                  required
                   type="number"
+                  min="1"
+                  max="7"
                   id="days-per-week" 
                   name="days-per-week"
                   value="<%= profile["days-per-week"] %>" />
@@ -109,7 +118,10 @@
                 <label for="vacation-per-year">Quantas semanas <br/>
                   por ano você quer tirar férias?</label>
                 <input 
+                  required
                   type="number" 
+                  min="0"
+                  max="52"
                   id="vacation-per-year" 
                   name="vacation-per-year"
                   value="<%= profile["vacation-per-year"] %>" />

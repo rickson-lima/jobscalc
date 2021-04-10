@@ -1,20 +1,40 @@
-// the model folder returns data
-let data = {
-  name: "Rickson Lima",
-  avatar: "https://github.com/rickson-lima.png",
-  "monthly-budget": 2400,
-  "days-per-week": 5,
-  "hours-per-day": 6,
-  "vacation-per-year": 3,
-  "value-hour": 69,
-};
+const Database = require('../db/config')
 
 module.exports = {
-   get(){
-      return data
+   async get(){
+      const db = await Database()
+
+      const data = await db.get(` SELECT * FROM profile `)
+
+      await db.close()
+
+      const formatedData = {
+         name: data.name,
+         avatar: data.avatar,
+         "monthly-budget": data.monthly_budget,
+         "days-per-week": data.days_per_week,
+         "hours-per-day": data.hours_per_day,
+         "vacation-per-year": data.vacation_per_year,
+         "value-hour": data.value_hour,
+      }
+
+      return formatedData
    },
 
-   update(newData){
-      data = newData
+   async update(newData){
+      const db = await Database()
+      
+      db.run(`UPDATE profile SET
+         name = "${newData.name}",
+         avatar = "${newData.avatar}",
+         monthly_budget = ${newData['monthly-budget']},
+         days_per_week = ${newData['days-per-week']},
+         hours_per_day = ${newData['hours-per-day']},
+         vacation_per_year = ${newData['vacation-per-year']},
+         value_hour = ${newData['value-hour']}
+         WHERE id = 1
+      `)
+
+      await db.close()
    }
 }
